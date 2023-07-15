@@ -1,0 +1,98 @@
+@import "@/styles/globals.scss";
+
+.redirectModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  h4 {
+    text-align: center !important;
+    font-weight: 400;
+    width: 100%;
+    color: $primary-dark;
+    font-size: 17px;
+
+    span {
+      color: $primary-dark;
+      font-weight: 700;
+    }
+  }
+}
+.wrapper {
+  background-color: $primary-dark;
+  height: 100dvh;
+  padding-top: 10px;
+
+  .container {
+    display: grid;
+    grid-template-columns: 0.7fr 1fr;
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+
+    .featured {
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+      overflow: hidden;
+      @include mobile {
+        display: none;
+      }
+      height: 100%;
+
+      //make full screen background image with gradient
+
+      background: linear-gradient(90deg, rgba($primary-dark, 1) 0%, rgba($primary-dark, 0.25) 100%), url("/images/cmsbackground1.jpg");
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      .message {
+        color: white;
+        font-size: 40px;
+        font-weight: 900;
+        text-align: center;
+        margin: 0 20px;
+      }
+    }
+
+    .auth {
+      // overflow-y: auto;
+      height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      .banner {
+        position: fixed;
+        top: 0px;
+        right: 50px;
+        z-index: 200;
+        background-color: $primary-dark;
+        padding: 50px 30px 20px 30px;
+        font-weight: 900;
+        color: white;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        @include mobile {
+          padding: 20px 40px;
+          font-size: 15px;
+        }
+      }
+
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      // height: 100%;
+      background-color: white;
+
+      position: relative;
+    }
+  }
+}

@@ -1,0 +1,88 @@
+$width: 990px;
+$white: #fff;
+$primary: rgb(60, 98, 85);
+$primary-dark: rgb(19, 58, 44);
+$primary-light: rgb(92, 138, 122);
+$secondary: rgb(97, 135, 110);
+$secondary-dark: rgb(60, 90, 74);
+$secondary-light: rgb(138, 176, 154);
+$tetriary: rgb(166, 187, 141);
+$tetriary-dark: rgb(113, 128, 95);
+$tetriary-light: rgb(211, 236, 179);
+$quaternary: rgb(234, 231, 177);
+$quaternary-dark: rgb(197, 193, 111);
+$quaternary-light: rgb(230, 228, 200);
+$quaternary-lighter: rgb(243, 242, 226);
+$gray: rgb(218, 218, 218);
+$mobile-width: 768px;
+$tablet-width: 1250px;
+
+$header-height: 4.4rem;
+
+$animation: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+$simple-animation: all 0.2s ease-in-out;
+
+@mixin mobile {
+  @media (max-width:#{$width}) {
+    @content;
+  }
+}
+
+.form {
+  padding: 50px 0;
+  label {
+    font-size: 15px;
+    font-weight: 400;
+    color: $secondary;
+  }
+
+  .input {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    margin: 0;
+    // background-color: $quaternary-light;
+    background-color: $gray;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 400;
+    color: $primary;
+    width: 100%;
+    border: none;
+    input {
+      // background-color: $primary-light;
+    }
+    &:focus {
+      outline: none;
+      // background-color: $primary-light;
+    }
+  }
+
+  .group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .header {
+    color: black !important;
+    font-size: 20px !important;
+  }
+
+  button {
+    margin-top: 20px;
+    background-color: $primary-dark;
+    padding: 0 50px;
+    font-weight: 600;
+
+    @include mobile {
+      width: 100%;
+    }
+
+    &:hover {
+      background-color: $primary-dark;
+    }
+  }
+}
