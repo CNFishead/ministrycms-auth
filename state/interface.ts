@@ -36,7 +36,7 @@ type InterfaceState = {
 
 export const useInterfaceStore = create<InterfaceState>(
   (set: any, get: any) => ({
-    currentSignUpStep: 0,
+    currentSignUpStep: 2,
     setCurrentSignUpStep: (step: SignUpStep) => {
       set({ currentSignUpStep: step });
     },

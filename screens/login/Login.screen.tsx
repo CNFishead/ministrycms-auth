@@ -46,7 +46,7 @@ const Auth = (props: Props) => {
       <div className={styles.info}>
         <hr />
         <p className={styles.signUpLink}>
-          Don't have an account? <a href="/signup">Start your free trial!</a>
+          Don't have an account? <a href="/signup">Start Managing Your Church Today!</a>
         </p>
         <p className={styles.forgotPasswordLink}>
           <a href="/forgot-password">Forgot your password?</a>

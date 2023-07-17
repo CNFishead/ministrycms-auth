@@ -20,11 +20,22 @@
     }
   }
 }
+@keyframes colorChange {
+  0% {
+    background-color: $primary-dark;
+  }
+  50% {
+    background-color: $primary-light;
+  }
+  100% {
+    background-color: $primary-dark;
+  }
+}
 .wrapper {
   background-color: $primary-dark;
   height: 100dvh;
   padding-top: 10px;
-
+  animation: colorChange 5s infinite;
   .container {
     display: grid;
     grid-template-columns: 0.7fr 1fr;
@@ -77,6 +88,7 @@
         right: 50px;
         z-index: 200;
         background-color: $primary-dark;
+        animation: colorChange 5s infinite;
         padding: 50px 30px 20px 30px;
         font-weight: 900;
         color: white;

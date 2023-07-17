@@ -1,0 +1,101 @@
+@import "@/styles/globals.scss";
+
+.wrapper {
+  max-height: 99dvh;
+
+  display: grid;
+  grid-template-rows: 1fr 100px;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+.step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  // background-color: white;
+  // border-radius: 10px;
+  // padding: 3px;
+  // flex-direction: column;
+}
+.container {
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr repeat(4, 1fr);
+  grid-template-columns: 1fr;
+  margin: auto;
+  padding-top: 100px;
+
+  .main {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    padding: 20px 100px;
+
+    @include mobile {
+      padding: 20px 40px;
+    }
+    .logo {
+      margin-bottom: 10px;
+      object-fit: contain;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 700;
+      color: $primary;
+    }
+    p {
+      font-size: 17px;
+      font-weight: 400;
+      color: rgb(139, 139, 139);
+    }
+  }
+
+  .info {
+    // height: 100%;
+    padding: 40px 100px;
+    @include mobile {
+      padding: 40px 40px;
+    }
+
+    // height: 100%;
+
+    .buttons {
+      display: flex;
+      justify-content: flex-start;
+      gap: 20px;
+    }
+
+    a {
+      color: $primary;
+      font-weight: 700;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .signUpLink {
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: 400;
+      color: $primary-light;
+    }
+  }
+}
+.stepsContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  // width: fit-content;
+  // overflow-y: scroll;
+  // height: 100px;
+  background-color: $quaternary-lighter;
+  border-top: 1px solid $quaternary-light;
+  box-shadow: rgba(204, 219, 232, 0) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+
+  padding: 40px 40px;
+  &:where(.css-dev-only-do-not-override-x9bx0p).ant-steps .ant-steps-item-process .ant-steps-item-icon {
+    background: $primary;
+    border-color: $primary;
+  }
+}

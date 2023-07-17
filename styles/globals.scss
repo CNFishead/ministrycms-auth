@@ -35,28 +35,6 @@ $simple-animation: all 0.2s ease-in-out;
     font-weight: 400;
     color: $secondary;
   }
-
-  .input {
-    margin-bottom: 20px;
-    border-radius: 10px;
-    margin: 0;
-    // background-color: $quaternary-light;
-    background-color: $gray;
-    padding: 10px;
-    font-size: 15px;
-    font-weight: 400;
-    color: $primary;
-    width: 100%;
-    border: none;
-    input {
-      // background-color: $primary-light;
-    }
-    &:focus {
-      outline: none;
-      // background-color: $primary-light;
-    }
-  }
-
   .group {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

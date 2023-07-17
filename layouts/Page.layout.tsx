@@ -59,8 +59,11 @@ const AuthPage = (props: Props) => {
       <div className={styles.container}>
         <div className={styles.featured}>
           <p className={styles.message}>
-            Shepherd's CMS is a free, open-source, and self-hosted content management system for churches. It is
+            Shepherd's CMS is a free, open-source cloud-hosted content management system for churches. It is
             designed to be simple, easy to use, and powerful.
+          </p>
+          <p>
+            Managing your church is hard. Shepherd's CMS makes it easy. <br />
           </p>
         </div>
         <div className={styles.auth}>
