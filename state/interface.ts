@@ -5,7 +5,7 @@ import { mountStoreDevtool } from 'simple-zustand-devtools';
 
 type InterfaceState = {
   currentSignUpStep: number;
-  setCurrentSignUpStep: (step: SignUpStep) => void;
+  setCurrentSignUpStep: (step: number) => void;
   advanceToNextSignUpStep: () => void;
   goBackToPreviousSignUpStep: () => void;
   isGoingToPreviousStep: boolean;
@@ -16,7 +16,7 @@ type InterfaceState = {
   signUpProfileFormValues: any;
   setSignUpProfileFormValues: (values: any) => void;
 
-  paymentMethod: string;
+  paymentMethod: any;
   setPaymentMethod: (method: string) => void;
 
   signUpPaymentFormValues: any;
@@ -32,12 +32,15 @@ type InterfaceState = {
 
   redirectName: string | undefined;
   setRedirectName: (path: string | undefined) => void;
+
+  didSendEmail: boolean;
+  setDidSendEmail: (value: boolean) => void;
 };
 
 export const useInterfaceStore = create<InterfaceState>(
   (set: any, get: any) => ({
-    currentSignUpStep: 2,
-    setCurrentSignUpStep: (step: SignUpStep) => {
+    currentSignUpStep: 0,
+    setCurrentSignUpStep: (step: number) => {
       set({ currentSignUpStep: step });
     },
     isGoingToPreviousStep: false,
@@ -54,7 +57,7 @@ export const useInterfaceStore = create<InterfaceState>(
     goBackToPreviousSignUpStep: () => {
       set((state: any) => {
         return {
-          signUpErrorDetected: true,
+          signUpErrorDetected: false,
 
           currentSignUpStep: state.currentSignUpStep - 1,
           isGoingToPreviousStep: true,
@@ -78,7 +81,7 @@ export const useInterfaceStore = create<InterfaceState>(
     },
 
     paymentMethod: '',
-    setPaymentMethod: (method: string) => {
+    setPaymentMethod: (method: any) => {
       set({ paymentMethod: method });
     },
 
@@ -105,6 +108,11 @@ export const useInterfaceStore = create<InterfaceState>(
     redirectName: undefined,
     setRedirectName: (name: any) => {
       set({ redirectName: name });
+    },
+
+    didSendEmail: false,
+    setDidSendEmail: (value: boolean) => {
+      set({ didSendEmail: value });
     },
   })
 );

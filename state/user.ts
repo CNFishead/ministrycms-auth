@@ -6,6 +6,9 @@ type UserState = {
   token: string | undefined;
 
   setToken: (token: string) => void;
+
+  user: any;
+  setUser: (user: any) => void;
   logout: () => void;
 };
 
@@ -17,9 +20,14 @@ export const useUserStore = create(
       setToken: (token) => {
         set({ token });
       },
+
+      user: undefined,
+      setUser: (user) => {
+        set({ user });
+      },
       logout: () => {
         console.log('Logging out');
-        set({ token: undefined });
+        set({ token: undefined, user: undefined });
 
         localStorage.removeItem('user-store');
       },

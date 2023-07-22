@@ -1,13 +1,15 @@
 export type SignUpStep = {
   id: number;
-  title: string;
+  title?: string;
   component: JSX.Element;
-  nextButtonText: string;
+  nextButtonText?: string;
+  isHiddenOnSteps?: boolean;
   headerText: string;
-  icon: JSX.Element;
+  icon?: JSX.Element;
   subHeaderText: string;
-  nextButtonDisabled: boolean;
-  hideBackButton: boolean;
+  nextButtonDisabled?: boolean;
+  hideBackButton?: boolean;
+  hideNextButton?: boolean;
   nextButtonAction: () => void;
   previousButtonAction?: () => void;
 };

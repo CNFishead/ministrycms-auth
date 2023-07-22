@@ -1,42 +1,23 @@
-import axios from '@/utils/axios';
-import { Form, Input, Radio, Select, Button } from 'antd';
-import styles from './UserInformationForm.module.scss';
-import { useInterfaceStore } from '@/state/interface';
-import { useEffect } from 'react';
+import axios from "@/utils/axios";
+import { Form, Input, Radio, Select, Button, FormInstance } from "antd";
+import styles from "./UserInformationForm.module.scss";
+import { useInterfaceStore } from "@/state/interface";
+import { useEffect } from "react";
 
-const UserInformationForm = () => {
-  const [form] = Form.useForm();
-  const {
-    setSignUpUserFormValues,
-    signUpUserFormValues,
-    setSignUpErrorDetected,
-  } = useInterfaceStore((state) => state);
+interface Props {
+  form: FormInstance;
+  onChangeHandler: () => void;
+}
+
+const UserInformationForm = (props: Props) => {
+  const { setSignUpUserFormValues, signUpUserFormValues, setSignUpErrorDetected } = useInterfaceStore((state) => state);
 
   useEffect(() => {
-    form.setFieldsValue(signUpUserFormValues);
+    props.form.setFieldsValue(signUpUserFormValues);
   }, []);
 
-  const onChange = () => {
-    setSignUpUserFormValues(form.getFieldsValue());
-
-    form
-      .validateFields()
-      .then((values) => {
-        setSignUpErrorDetected(false);
-      })
-      .catch((err) => {
-        setSignUpErrorDetected(true);
-      });
-  };
-
   return (
-    <Form
-      form={form}
-      onChange={onChange}
-      className={styles.form}
-      initialValues={{ sex: 'male' }}
-      layout="vertical"
-    >
+    <Form form={props.form} className={styles.form} initialValues={{ sex: "male" }} layout="vertical" onChange={props.onChangeHandler}>
       <div className={styles.group}>
         <Form.Item
           name="firstName"
@@ -45,7 +26,7 @@ const UserInformationForm = () => {
           rules={[
             {
               required: true,
-              message: 'Please enter your first name',
+              message: "Please enter your first name",
             },
           ]}
         >
@@ -59,7 +40,7 @@ const UserInformationForm = () => {
           rules={[
             {
               required: true,
-              message: 'Please enter your last name',
+              message: "Please enter your last name",
             },
           ]}
         >
@@ -74,15 +55,24 @@ const UserInformationForm = () => {
         rules={[
           {
             required: true,
-            type: 'email',
-            message: 'Please enter a valid email address',
+            type: "email",
+            message: "Please enter a valid email address",
           },
+          () => ({
+            async validator(_, value) {
+              if (value === "") return;
+              // url encode the value
+              const urlEncodedValue = encodeURIComponent(value);
+              const { data } = await axios.get(`/auth/${urlEncodedValue || " "}/email`);
+              if (data.exists === true) {
+                return Promise.reject("Email already exists, please use another email");
+              }
+              return Promise.resolve();
+            },
+          }),
         ]}
       >
-        <Input
-          className={styles.input}
-          placeholder="Enter your email address"
-        />
+        <Input className={styles.input} placeholder="Enter your email address" />
       </Form.Item>
 
       <Form.Item
@@ -92,15 +82,14 @@ const UserInformationForm = () => {
           {
             required: true,
             pattern: /^[a-zA-Z0-9]+$/,
-            message: 'Username cannot contain spaces or special characters',
+            message: "Username cannot contain spaces or special characters",
           },
           () => ({
             async validator(_, value) {
-              const { data } = await axios.get(
-                `/auth/${value || ' '}/username`
-              );
+              if (value === "") return;
+              const { data } = await axios.get(`/auth/${value || " "}/username`);
               if (data.exists === true) {
-                return Promise.reject('Username already exists');
+                return Promise.reject("Username already exists");
               }
               return Promise.resolve();
             },
@@ -118,7 +107,7 @@ const UserInformationForm = () => {
           rules={[
             {
               required: true,
-              message: 'Please enter your password',
+              message: "Please enter your password",
             },
 
             {
@@ -126,39 +115,33 @@ const UserInformationForm = () => {
             },
           ]}
         >
-          <Input.Password
-            className={styles.input}
-            placeholder="Enter your password"
-          />
+          <Input.Password className={styles.input} placeholder="Enter your password" />
         </Form.Item>
 
         <Form.Item
           name="confirmPassword"
           label="Confirm Password"
           initialValue=""
-          dependencies={['password']}
+          dependencies={["password"]}
           rules={[
             {
               required: true,
-              message: 'Please confirm your password',
+              message: "Please confirm your password",
             },
             {
               min: 10,
             },
             ({ getFieldValue }) => ({
               validator(_, value) {
-                if (!value || getFieldValue('password') === value) {
+                if (!value || getFieldValue("password") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject('The two passwords do not match');
+                return Promise.reject("The two passwords do not match");
               },
             }),
           ]}
         >
-          <Input.Password
-            className={styles.input}
-            placeholder="Confirm your password"
-          />
+          <Input.Password className={styles.input} placeholder="Confirm your password" />
         </Form.Item>
       </div>
 
@@ -170,14 +153,11 @@ const UserInformationForm = () => {
           rules={[
             {
               required: true,
-              message: 'Please confirm your password',
+              message: "Please confirm your password",
             },
           ]}
         >
-          <Input
-            className={styles.input}
-            placeholder="Enter your phone number"
-          />
+          <Input className={styles.input} placeholder="Enter your phone number" />
         </Form.Item>
 
         <Form.Item name="sex" label="Sex" initialValue="male">
