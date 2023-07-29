@@ -145,6 +145,7 @@ export const useSendPasswordForgotRequest = () => {
 export const useRegisterUser = () => {
   // get the signupUserForm data from state
   const { signUpUserFormValues } = useInterfaceStore((state) => state);
+  const { setToken } = useUserStore((state) => state);
   const query = useMutation(() => registerUser(signUpUserFormValues), {
     onError: (error) => {
       console.log(error);
@@ -152,6 +153,7 @@ export const useRegisterUser = () => {
     },
     onSuccess: (data) => {
       console.log(data);
+      setToken(data.user.token);
       message.success(data.message);
     },
   });

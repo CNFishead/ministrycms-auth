@@ -1,5 +1,5 @@
 import axios from "@/utils/axios";
-import { Form, Input, Radio, Select, Button, FormInstance } from "antd";
+import { Form, Input, Radio, Select, Button, FormInstance, InputNumber } from "antd";
 import styles from "./UserInformationForm.module.scss";
 import { useInterfaceStore } from "@/state/interface";
 import { useEffect } from "react";
@@ -157,7 +157,22 @@ const UserInformationForm = (props: Props) => {
             },
           ]}
         >
-          <Input className={styles.input} placeholder="Enter your phone number" />
+            <InputNumber
+              style={{ width: "100%" }}
+              controls={false}
+              formatter={(value: any) => {
+                const phoneNumber = value.replace(/[^\d]/g, "");
+                const phoneNumberLength = phoneNumber.length;
+                if (phoneNumberLength < 4) {
+                  return phoneNumber;
+                } else if (phoneNumberLength < 7) {
+                  return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+                }
+                return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+              }}
+              parser={(value: any) => value.replace(/[^\d]/g, "")}
+              placeholder="Enter Phone Number"
+            />
         </Form.Item>
 
         <Form.Item name="sex" label="Sex" initialValue="male">

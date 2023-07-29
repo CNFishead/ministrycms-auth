@@ -4,6 +4,7 @@ import styles from "./ProfileInformationForm.module.scss";
 import { useInterfaceStore } from "@/state/interface";
 import { useEffect } from "react";
 import phoneNumber from "@/utils/phoneNumber";
+import { states } from "@/utils/states";
 
 interface Props {
   form: FormInstance;
@@ -52,7 +53,18 @@ const ProfileInformationForm = (props: Props) => {
           <Input className={styles.input} />
         </Form.Item>
         <Form.Item name={["ministry", "state"]} label="State" rules={[{ required: true }]}>
-          <Input className={styles.input} />
+          <Select
+            placeholder="Select a state"
+            className={styles.input}
+            showSearch
+            filterOption={(input: any, option: any) => option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+          >
+            {states.map((state) => (
+              <Select.Option key={state.abbreviation} value={state.abbreviation}>
+                {state.abbreviation}
+              </Select.Option>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item name={["ministry", "zipCode"]} label="Zip Code" rules={[{ required: true }]}>
           <Input className={styles.input} />

@@ -42,7 +42,7 @@ const AuthPage = (props: Props) => {
       const isProduction = process.env.ENV === "production";
       return performRedirect(
         isProduction
-          ? `https://shepherdscms.org/${token ? `?token=${token}` : ""}`
+          ? `https://www.shepherdcms.org/${token ? `?token=${token}` : ""}`
           : `http://localhost:3000/${token ? `?token=${token}` : ""}`
       );
     }
