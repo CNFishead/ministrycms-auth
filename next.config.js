@@ -6,6 +6,7 @@ const nextConfig = {
   },
   env: {
     ENV: "production",
+    API_URL: "https://api.shepherdcms.org",
     // ENV: "development",
   },
 };
