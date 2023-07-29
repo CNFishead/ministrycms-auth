@@ -39,7 +39,7 @@ const AuthPage = (props: Props) => {
 
       // if we are in production, redirect to the main site
       // othwerwise, redirect to the local site
-      const isProduction = process.env.NODE_ENV === "production";
+      const isProduction = process.env.ENV === "production";
       return performRedirect(
         isProduction
           ? `https://shepherdscms.org/${token ? `?token=${token}` : ""}`

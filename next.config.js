@@ -4,6 +4,10 @@ const nextConfig = {
   images: {
     domains: ["localhost", "res.cloudinary.com", "api.shepherdcms.org"],
   },
+  env: {
+    ENV: "production",
+    // ENV: "development",
+  },
 };
 
 module.exports = nextConfig;
