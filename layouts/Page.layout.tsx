@@ -35,16 +35,12 @@ const AuthPage = (props: Props) => {
     if (!router.isReady) return;
 
     if (token) {
-      if (redirect) return performRedirect(redirect);
+      if (redirect) return performRedirect(`${redirect}?token=${token}`);
 
       // if we are in production, redirect to the main site
       // othwerwise, redirect to the local site
       const isProduction = process.env.ENV === "production";
-      return performRedirect(
-        isProduction
-          ? `https://www.shepherdcms.org/${token ? `?token=${token}` : ""}`
-          : `http://localhost:3000/${token ? `?token=${token}` : ""}`
-      );
+      return performRedirect(isProduction ? `https://www.shepherdcms.org/?token=${token}` : `http://localhost:3000/?token=${token}`);
     }
   }, [token, redirect]);
 
